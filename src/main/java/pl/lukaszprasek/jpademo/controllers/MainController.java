@@ -20,7 +20,7 @@ public class MainController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("barcodeForm", new BarcodeForm());
-        model.addAttribute("allBarcodes",barcodeRepository.findAll());
+        model.addAttribute("allBarcodes",barcodeRepository.findAllByOrderByIdDesc());
         return "addBarcode";
     }
 
@@ -29,7 +29,7 @@ public class MainController {
     public String index(@ModelAttribute BarcodeForm barcodeForm) {
         BarcodeEntity barcodeEntity = new BarcodeEntity(barcodeForm);
         barcodeRepository.save(barcodeEntity);
-        return "Dodano do bazy";
+        return "redirect:/";
     }
 
 

@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface BarcodeRepository extends CrudRepository<BarcodeEntity, Integer> {
-    List<BarcodeEntity> findAll();
+    List<BarcodeEntity> findAllByOrderByIdDesc();
+    //List<BarcodeRepository> findAllByProductCompanyStartsWithAndIdIsGeaterThan(String s, int i);
 }
