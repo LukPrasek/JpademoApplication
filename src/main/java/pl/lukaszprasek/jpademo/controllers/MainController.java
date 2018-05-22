@@ -10,6 +10,7 @@ import pl.lukaszprasek.jpademo.models.repositories.BarcodeRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -17,9 +18,16 @@ public class MainController {
     @Autowired
     BarcodeRepository barcodeRepository; // = new BarcodeRepostitory();
 
+    //@GetMapping("/search")
     @GetMapping("/search")
     public String index(Model model) {
         model.addAttribute("barcodeForm", new BarcodeForm());
+//        Optional<BarcodeEntity> barcodeEntity=barcodeRepository.findById(2);
+//        BarcodeEntity barcodeEntityObject=barcodeEntity.orElseThrow(IllegalStateException::new);
+//        barcodeEntityObject.setProductName("Laptop");
+//        barcodeEntityObject.setProductCompany("Dell");
+//        barcodeEntityObject.setWeight(6);
+//        barcodeRepository.save(barcodeEntityObject);
         // model.addAttribute("allBarcodes",barcodeRepository.findAllByWeightBetween(10,200));
         //model.addAttribute("allBarcodes", barcodeRepository.findByBarcodeContainsAndBarcodeContainsAndWeightIsGreaterThanEqual("1237", "2", 10));//barcode 1 lub 2 i waga >= 10
         //model.addAttribute("barcodesFromUser", )

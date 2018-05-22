@@ -9,7 +9,6 @@ import java.util.List;
 @Repository
 public interface BarcodeRepository extends CrudRepository<BarcodeEntity, Integer> {
     List<BarcodeEntity> findAllByOrderByIdDesc();
-
     List<BarcodeEntity> findByBarcodeContainsAndBarcodeContainsAndWeightIsGreaterThanEqual(String s, String a, int i);
 
     //List<BarcodeEntity> findAllByWeightBetween(int s, int i);

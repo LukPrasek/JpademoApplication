@@ -18,7 +18,6 @@ public class BarcodeForm {
     public BarcodeForm() {
     }
 
-
     public String getBarcode() {
         return barcode;
     }
