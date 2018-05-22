@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj kod kreskowy</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <form action="/" method="post" th:object="${barcodeForm}">
+            Nazwa firmy: <input type="text" th:field="*{companyName}" placeholder="Nazwa firmy"> <br/>
+            Nazwa produktu: <input type="text" th:field="*{productName}"> <br/>
+            Kod kreskowy: <input type="text" maxlength="13" th:field="*{barcode}"> <br/>
+            Waga: <input type="number" max="200" th:field="*{weight}"> <br/>
+            <input type="submit" value="Wyślij"/>
+        </form>
+    </div>
+<br/>
+<br/>
+    <div th:each="item : ${allBarcodes}">
+        <h1 th:text="${item.getProductName()}"></h1> <small th:text="${item.getProductCompany()}"></small>
+        <br/>
+        Kod kreskowy: <span th:text="${item.getBarcode()}"></span> <small th:text="'Waga: ' + ${item.getWeight()}"></small>
+        <hr/>
+
+</div>
+</body>
+</html>
