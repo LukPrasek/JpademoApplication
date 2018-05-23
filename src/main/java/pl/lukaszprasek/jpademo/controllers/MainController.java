@@ -7,38 +7,27 @@ import org.springframework.web.bind.annotation.*;
 import pl.lukaszprasek.jpademo.models.BarcodeEntity;
 import pl.lukaszprasek.jpademo.models.forms.BarcodeForm;
 import pl.lukaszprasek.jpademo.models.repositories.BarcodeRepository;
+import pl.lukaszprasek.jpademo.models.services.BasketService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 @Controller
 public class MainController {
 
     @Autowired
     BarcodeRepository barcodeRepository; // = new BarcodeRepostitory();
 
-    //@GetMapping("/search")
-    @GetMapping("/search")
+    @Autowired
+    BasketService basketService;
+
+    @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("barcodeForm", new BarcodeForm());
-//        Optional<BarcodeEntity> barcodeEntity=barcodeRepository.findById(2);
-//        BarcodeEntity barcodeEntityObject=barcodeEntity.orElseThrow(IllegalStateException::new);
-//        barcodeEntityObject.setProductName("Laptop");
-//        barcodeEntityObject.setProductCompany("Dell");
-//        barcodeEntityObject.setWeight(6);
-//        barcodeRepository.save(barcodeEntityObject);
-        // model.addAttribute("allBarcodes",barcodeRepository.findAllByWeightBetween(10,200));
-        //model.addAttribute("allBarcodes", barcodeRepository.findByBarcodeContainsAndBarcodeContainsAndWeightIsGreaterThanEqual("1237", "2", 10));//barcode 1 lub 2 i waga >= 10
-        //model.addAttribute("barcodesFromUser", )
-
-        //Dorob pole wyszukiwania na ekranie glownym, gdzie uzytkownik poda fraze. Natepne wyswietl tylko te barcody,
-        // ktore w nazwie produktu lub nazwie firmy zawieraja to co wpisal uzytkownik
-
+        model.addAttribute("allBarcodes", barcodeRepository.findAll());
+        model.addAttribute("basket", basketService);
         return "addBarcode";
     }
-
-
 
     @PostMapping("/")
     public String index(@ModelAttribute BarcodeForm barcodeForm){
@@ -58,5 +47,16 @@ public class MainController {
         return "addBarcode";
     }
 
+    @GetMapping("/add/{id}")
+    public String addToBasket(@PathVariable("id") int id){
+        basketService.addProductToList(barcodeRepository.findById(id).orElseThrow(IllegalStateException::new));
+        return "redirect:/";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String removeFromBasket(@PathVariable("id") int id){
+        basketService.removeProductFromList(id);
+        return "redirect:/";
+    }
 
 }

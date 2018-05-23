@@ -11,9 +11,6 @@ public interface BarcodeRepository extends CrudRepository<BarcodeEntity, Integer
     List<BarcodeEntity> findAllByOrderByIdDesc();
     List<BarcodeEntity> findByBarcodeContainsAndBarcodeContainsAndWeightIsGreaterThanEqual(String s, String a, int i);
 
-    //List<BarcodeEntity> findAllByWeightBetween(int s, int i);
-    //Dorob pole wyszukiwania na ekranie glownym, gdzie uzytkownik poda fraze. Natepne wyswietl tylko te barcody,
-    // ktore w nazwie produktu lub nazwie firmy zawieraja to co wpisal uzytkownik
     List<BarcodeEntity> findAllByProductCompanyContains(String text);
     List<BarcodeEntity> findAllByProductNameContains(String text);
 }
